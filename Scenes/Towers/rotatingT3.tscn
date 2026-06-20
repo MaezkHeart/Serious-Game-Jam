@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rfx3kryf01y7"]
 
-[ext_resource type="Script" uid="uid://dljaugevd8hj2" path="res://Scripts/Towers/rotating_double_cannon.gd" id="1_manvl"]
+[ext_resource type="Script" uid="uid://bpxip87yp2wtp" path="res://Scripts/Towers/rotating_double_cannon.gd" id="1_manvl"]
 [ext_resource type="PackedScene" uid="uid://c6fdt1bcn8xt5" path="res://Scenes/no_placement_zone.tscn" id="2_or2mc"]
 [ext_resource type="PackedScene" uid="uid://csnltdttfxamx" path="res://Scenes/HandCrank.tscn" id="3_kvt7n"]
 [ext_resource type="PackedScene" uid="uid://blirsj2s58ea8" path="res://Scenes/Energy_bar.tscn" id="4_kwt13"]
@@ -16,6 +16,7 @@ z_index = 1
 scale = Vector2(0.425, 0.425)
 script = ExtResource("1_manvl")
 energy_loss_speed = 0.35
+energy_gain_speed = 8
 
 [node name="Body" type="Polygon2D" parent="." unique_id=694839832]
 position = Vector2(-4.768372e-07, -4.768372e-07)
