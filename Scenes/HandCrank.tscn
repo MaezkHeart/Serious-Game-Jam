@@ -27,6 +27,8 @@ texture = ExtResource("1_p1uua")
 position = Vector2(100, 0)
 
 [node name="ClickableArea" type="Area2D" parent="HandCrankHandle" unique_id=743932603]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandCrankHandle/ClickableArea" unique_id=1234371934]
 shape = SubResource("CircleShape2D_p1uua")
@@ -36,6 +38,7 @@ debug_color = Color(0.99979347, 0, 0.11640803, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandCrankHandle/DraggableArea" unique_id=1811644536]
 shape = SubResource("CircleShape2D_fxr5o")
+disabled = true
 
 [node name="HandCrankHandleSprite" type="Sprite2D" parent="HandCrankHandle" unique_id=2035574822]
 texture = ExtResource("1_e6f0s")

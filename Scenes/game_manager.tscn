@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cj6awxywoyl1s"]
+
+[ext_resource type="Script" uid="uid://l2w2ex0r7vdr" path="res://Scripts/main.gd" id="1_glms7"]
+
+[node name="GameManager" type="Node2D" unique_id=1848386580]
+script = ExtResource("1_glms7")
+
+[node name="ResourceLabel" type="Label" parent="." unique_id=1479930343]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 200.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 30
+text = "Resources = 0"

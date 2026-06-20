@@ -11,11 +11,14 @@ signal cranked(distance : float)
 var following_mouse : bool = false
 # used to convert the max rotation speed to radians for godot's use
 var max_rotation_speed_rad : float
+var last_crank_pos : float
 
 func _ready() -> void:
 	max_rotation_speed_rad = deg_to_rad(MAX_ROTATION_SPEED)
 	$HandCrankHandle/ClickableArea.input_event.connect(on_crank_handle_input)
 	$HandCrankHandle/DraggableArea.mouse_exited.connect(on_mouse_exited_range)
+	
+	last_crank_pos = rotation
 
 
 # begin following the mouse when the crank is clicked
@@ -36,8 +39,14 @@ func _physics_process(delta: float) -> void:
 			following_mouse = false
 			return
 		# rotates the crank toward the mouse cursor, limited by the max rotation speed
+			# Why are multiplying max rot by delta ?
 		var max_frame_rotation = max_rotation_speed_rad * delta
-		var frame_rotation = clamp(get_angle_to(get_global_mouse_position()), -max_frame_rotation, max_frame_rotation)
+		var frame_rotation = clamp(
+				get_angle_to(get_global_mouse_position()),
+				 -max_frame_rotation,
+				 max_frame_rotation
+			)
 		rotation += frame_rotation
 		# let listeners know the crank was cranked
 		cranked.emit(frame_rotation)
+		last_crank_pos = rotation

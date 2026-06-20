@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://be1i5jo3b7ouu"]
+
+[ext_resource type="Script" uid="uid://8jql1hf4lr6p" path="res://Scripts/Towers/rotating_towers.gd" id="1_5ei3g"]
+[ext_resource type="PackedScene" uid="uid://c6fdt1bcn8xt5" path="res://Scenes/no_placement_zone.tscn" id="2_840gu"]
+[ext_resource type="PackedScene" uid="uid://csnltdttfxamx" path="res://Scenes/HandCrank.tscn" id="3_ibbi0"]
+[ext_resource type="PackedScene" uid="uid://blirsj2s58ea8" path="res://Scenes/Energy_bar.tscn" id="4_mwjbr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3mc5"]
+radius = 306.0271
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_el7wl"]
+radius = 50.039986
+
+[node name="rotatingT1" type="Node2D" unique_id=1284188417]
+scale = Vector2(0.425, 0.425)
+script = ExtResource("1_5ei3g")
+
+[node name="Body" type="Polygon2D" parent="." unique_id=2028414917]
+position = Vector2(-4.7683716e-07, -4.7683716e-07)
+polygon = PackedVector2Array(-10.666666, -60, 13.333332, -60, 37.333317, -52, 53.333332, -36.000004, 61.333317, -12.000004, 61.333317, 11.999996, 53.333332, 35.999996, 37.333317, 51.999996, 13.333317, 59.999996, -10.666666, 59.999996, -34.666668, 51.999996, -50.666668, 35.999996, -58.666668, 11.999996, -58.666683, -12.000004, -50.666676, -36, -34.666668, -52.000004)
+uv = PackedVector2Array(-32, -40, -8, -40, 15.999985, -31.999996, 32, -16, 39.999985, 8, 39.999985, 32, 32, 56, 15.999985, 72, -8.000015, 80, -32, 80, -56, 72, -72, 56, -80, 32, -80.000015, 8, -72, -16, -56, -32)
+
+[node name="Pivot" type="Node2D" parent="." unique_id=943967472]
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="Canon" type="Polygon2D" parent="Pivot" unique_id=784986024]
+position = Vector2(-4.768372e-07, -4.768372e-07)
+scale = Vector2(1.0000001, 1.0000001)
+color = Color(0.8865703, 0.69839734, 0.4878264, 1)
+polygon = PackedVector2Array(112, -24, 23.999985, -23.999998, 23.999985, 23.999996, 112, 24.000004)
+uv = PackedVector2Array(-60.000244, -36.666664, -60.000244, 42, -34.66693, 42, -34.66693, -36.666664)
+
+[node name="BulletSpawnPt" type="Node2D" parent="Pivot" unique_id=421893816]
+position = Vector2(125.38001, -4.768372e-07)
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=3539102]
+wait_time = 1.2
+
+[node name="TurretRange" type="Area2D" parent="." unique_id=1164446182]
+collision_layer = 0
+monitorable = false
+
+[node name="RangeCollider" type="CollisionShape2D" parent="TurretRange" unique_id=416698347]
+z_index = -1
+shape = SubResource("CircleShape2D_x3mc5")
+disabled = true
+debug_color = Color(0.73333335, 0.46666667, 0.20784314, 0.18431373)
+
+[node name="TurretBody" type="Area2D" parent="." unique_id=499776258]
+visible = false
+collision_layer = 0
+collision_mask = 192
+
+[node name="BodyCollider" type="CollisionShape2D" parent="TurretBody" unique_id=707547392]
+shape = SubResource("CircleShape2D_el7wl")
+debug_color = Color(0, 0.6172859, 0.58930415, 0.41960785)
+
+[node name="NoPlacementZone" parent="." unique_id=2029443674 instance=ExtResource("2_840gu")]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NoPlacementZone" unique_id=1445545837]
+polygon = PackedVector2Array(-87.05883, -84.70589, -34, -115, 35, -117, 96, -85, 128, -38, 128, 28, 103, 76, 47.058826, 110.58824, -37.64706, 110.58824, -82.35294, 87.05883, -117.647064, 32.941177, -115.29412, -42.352943)
+disabled = true
+
+[node name="HandCrank" parent="." unique_id=1719548301 instance=ExtResource("3_ibbi0")]
+position = Vector2(-4.7058825, -2.3529413)
+rotation = -1.9373155
+
+[node name="EnergyBar" parent="." unique_id=1347073494 instance=ExtResource("4_mwjbr")]
+offset_left = -148.2353
+offset_top = 37.64706
+offset_right = -113.235306
+offset_bottom = 44.64706
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="area_entered" from="TurretRange" to="." method="_on_turret_range_area_entered"]
+[connection signal="area_exited" from="TurretRange" to="." method="_on_turret_range_area_exited"]
+[connection signal="cranked" from="HandCrank" to="." method="energy_gain"]

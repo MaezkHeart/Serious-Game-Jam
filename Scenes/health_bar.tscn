@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bhkf6qcec8mh8"]
+
+[ext_resource type="Script" uid="uid://d00d8bj0r44i8" path="res://Scripts/health_bar.gd" id="1_1bvlm"]
+
+[node name="HealthBar" type="ProgressBar" unique_id=1188653285]
+offset_right = 151.0
+offset_bottom = 27.0
+show_percentage = false
+script = ExtResource("1_1bvlm")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=1950799019]
+layout_mode = 0
+offset_right = 151.0
+offset_bottom = 28.0
+text = "1000 / 1000"
+horizontal_alignment = 1
+vertical_alignment = 1

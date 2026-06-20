@@ -1,0 +1,421 @@
+[gd_scene format=3 uid="uid://beb3fcbpvaqu8"]
+
+[ext_resource type="Script" uid="uid://dymbpiawfv7gh" path="res://Scripts/core.gd" id="1_5634n"]
+[ext_resource type="PackedScene" uid="uid://c6fdt1bcn8xt5" path="res://Scenes/no_placement_zone.tscn" id="2_c8oal"]
+[ext_resource type="PackedScene" uid="uid://bhkf6qcec8mh8" path="res://Scenes/health_bar.tscn" id="2_hlf4f"]
+
+[sub_resource type="Animation" id="Animation_c8oal"]
+length = 120.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InnerSpinny:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InnerSpinny/PolygonY:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InnerSpinny/PolygonB1:color")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InnerSpinny/PolygonP:color")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.2333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InnerSpinny/PolygonB2:color")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PolygonCore:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OuterSpinny:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("OuterSpinny/PolygonY:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("OuterSpinny/PolygonB1:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("OuterSpinny/PolygonB2:color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.9333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("OuterSpinny/PolygonP:color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PolygonCore:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, -30)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PolygonCore:polygon")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-200.00003, 0, -100, -79.99999, 0, 0, 0, 60.000008, -100, 140.00003, -200.00003, 60.000008)]
+}
+
+[sub_resource type="Animation" id="Animation_gmp2s"]
+resource_name = "Core_Idle"
+length = 120.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InnerSpinny:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60.356968, 60.366665, 120),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1e-05),
+"update": 0,
+"values": [-6.283185307179586, 6.283185307179586, 0.0, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InnerSpinny/PolygonY:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 15.666664, 31.066666, 45.933334, 60.533333, 75.4, 89.166664, 104.26666, 119.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InnerSpinny/PolygonB1:color")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 15.400002, 30.26667, 44.86667, 59.733337, 73.5, 88.6, 104.53334, 119.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InnerSpinny/PolygonP:color")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 14.866669, 29.46667, 44.333336, 58.100002, 73.2, 89.13334, 104.1, 120),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InnerSpinny/PolygonB2:color")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 14.6, 29.466667, 43.233334, 58.333332, 74.26667, 89.23333, 104.166664, 120),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1), Color(0.45882353, 1, 1, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0.9764706, 0.5294118, 0.49019608, 1), Color(0.8901961, 0.9529412, 0.28235295, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PolygonCore:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 9.633333, 30.7, 52.9, 75.36667, 96.566666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.16470589, 0.050980393, 0.14509805, 1), Color(0.17024627, 0.009190273, 0.19490543, 1), Color(0.039215688, 0.08235294, 0.22745098, 1), Color(0.05773081, 0.17007372, 0.072533704, 1), Color(0.15804566, 0.09339243, 0.10060483, 1), Color(0.16862746, 0.007843138, 0.19607843, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OuterSpinny:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 120),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.2831855, -6.283185307179586]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("OuterSpinny/PolygonY:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 28.333334, 61.066666, 92, 119.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.43396536, 0.4648615, 0.042386793, 1), Color(0.58431375, 0.12941177, 0.12941177, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(2.1658838e-07, 0.3532138, 0.35471436, 1), Color(0.43396536, 0.4648615, 0.042386793, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("OuterSpinny/PolygonB1:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6333389, 28.966673, 61.700005, 92.63334, 119.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.58431375, 0.12941177, 0.12941177, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0, 0.3529412, 0.3529412, 1), Color(0.43529412, 0.46666667, 0.043137256, 1), Color(0.43529412, 0.46666667, 0.043137256, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("OuterSpinny/PolygonB2:color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 28.333334, 61.066666, 92, 119.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0, 0.3529412, 0.3529412, 1), Color(0.43529412, 0.46666667, 0.043137256, 1), Color(0.58431375, 0.12941177, 0.12941177, 1), Color(0.78039217, 0.30588236, 0.64705884, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("OuterSpinny/PolygonP:color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 28.733334, 61.066666, 92, 119.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.3529412, 0.3529412, 1), Color(0.43529412, 0.46666667, 0.043137256, 1), Color(0.58431375, 0.12941177, 0.12941177, 1), Color(0.78039217, 0.30588236, 0.64705884, 1), Color(0, 0.3529412, 0.3529412, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PolygonCore:position")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PolygonCore:polygon")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 24.733334, 48.7, 72.26667, 97.13333, 120.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-200.00003, 0, -100, -79.99999, 0, 0, 0, 60.000008, -100, 140.00003, -200.00003, 60.000008), PackedVector2Array(-164.505, 0, -97.295, -100.195, -34.675, 0, -34.655, 60, -100, 158.235, -164.025, 60), PackedVector2Array(-200.00003, 0, -100, -79.99999, 0, 0, 0, 60.000008, -100, 140.00003, -200.00003, 60.000008), PackedVector2Array(-164.505, 0, -97.295, -100.195, -34.675, 0, -34.655, 60, -100, 158.235, -164.025, 60), PackedVector2Array(-200.00003, 0, -100, -79.99999, 0, 0, 0, 60.000008, -100, 140.00003, -200.00003, 60.000008), PackedVector2Array(-164.505, 0, -97.295, -100.195, -34.675, 0, -34.655, 60, -100, 158.235, -164.025, 60)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qapo8"]
+_data = {
+&"RESET": SubResource("Animation_c8oal"),
+&"core_idle": SubResource("Animation_gmp2s")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvavo"]
+radius = 110.00455
+
+[node name="Core" type="Node2D" unique_id=647245293]
+script = ExtResource("1_5634n")
+
+[node name="NoPlacementZone" parent="." unique_id=158715274 instance=ExtResource("2_c8oal")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NoPlacementZone" unique_id=1183413814]
+polygon = PackedVector2Array(1, -120, 112, -49, 113, 54, 0, 123, -113, 58, -109, -59)
+
+[node name="OuterSpinny" type="Node2D" parent="." unique_id=2016661022]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(1.305, 1.305)
+
+[node name="PolygonY" type="Polygon2D" parent="OuterSpinny" unique_id=663053557]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-100, -86.84967, 6.226982, -23.11349, 6.226982, 83.11349)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonB1" type="Polygon2D" parent="OuterSpinny" unique_id=807469545]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-162, 50, -62, -24, 6.226982, 83.11349, -100, 146.8497)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonB2" type="Polygon2D" parent="OuterSpinny" unique_id=820206791]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-206.22696, -23.11349, -100, -86.84967, -47, -1, -154, 62)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonP" type="Polygon2D" parent="OuterSpinny" unique_id=1665212827]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-206.22696, -23.11349, -100, 146.8497, -206.22696, 83.11349)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="InnerSpinny" type="Node2D" parent="." unique_id=1347752580]
+
+[node name="PolygonY" type="Polygon2D" parent="InnerSpinny" unique_id=1871325630]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-100, -86.84967, 6.226982, -23.11349, 6.226982, 83.11349)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonB1" type="Polygon2D" parent="InnerSpinny" unique_id=1566746789]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-162, 50, -62, -24, 6.226982, 83.11349, -100, 146.8497)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonB2" type="Polygon2D" parent="InnerSpinny" unique_id=180812755]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-206.22696, -23.11349, -100, -86.84967, -47, -1, -154, 62)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonP" type="Polygon2D" parent="InnerSpinny" unique_id=370881709]
+position = Vector2(100.22696, -29.15033)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-206.22696, -23.11349, -100, 146.8497, -206.22696, 83.11349)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="PolygonCore" type="Polygon2D" parent="." unique_id=329205987]
+position = Vector2(100, -30)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-200.00003, 0, -100, -79.99999, 0, 0, 0, 60.000008, -100, 140.00003, -200.00003, 60.000008)
+uv = PackedVector2Array(-219.1549, -13.820076, -103.979004, -72.38411, -10.27655, -9.91581, -10.27655, 81.83451, -107.88324, 136.49426, -215.25067, 83.786644)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2081059230]
+libraries/ = SubResource("AnimationLibrary_qapo8")
+autoplay = &"core_idle"
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=521978740]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=327804817]
+visible = false
+shape = SubResource("CircleShape2D_lvavo")
+
+[node name="HealthBar" parent="." unique_id=1993336142 instance=ExtResource("2_hlf4f")]
+offset_left = -76.0
+offset_top = -149.0
+offset_right = 75.0
+offset_bottom = -122.0
+
+[connection signal="area_entered" from="ClickArea" to="." method="_on_area_2d_area_entered"]

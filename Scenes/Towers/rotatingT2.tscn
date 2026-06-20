@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dj2rgpqwii2m"]
+
+[ext_resource type="Script" uid="uid://8jql1hf4lr6p" path="res://Scripts/Towers/rotating_towers.gd" id="1_a7pfb"]
+[ext_resource type="PackedScene" uid="uid://c6fdt1bcn8xt5" path="res://Scenes/no_placement_zone.tscn" id="2_7ahgn"]
+[ext_resource type="PackedScene" uid="uid://csnltdttfxamx" path="res://Scenes/HandCrank.tscn" id="3_w7mpn"]
+[ext_resource type="PackedScene" uid="uid://blirsj2s58ea8" path="res://Scenes/Energy_bar.tscn" id="4_ogqkv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3mc5"]
+radius = 427.01053
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_el7wl"]
+radius = 50.039986
+
+[node name="RotatingT2" type="Node2D" unique_id=1284188417]
+z_index = 1
+scale = Vector2(0.425, 0.425)
+script = ExtResource("1_a7pfb")
+energy_loss_speed = 0.3
+
+[node name="Body" type="Polygon2D" parent="." unique_id=318227522]
+position = Vector2(-4.768372e-07, -4.768372e-07)
+scale = Vector2(1.0000001, 1.0000001)
+polygon = PackedVector2Array(-27, -51.999992, 28.99997, -51.999992, 60.999985, -43.999996, 61, -19.999996, 53, -4, 53, 4, 61, 20.000008, 61, 44, 29, 51.999992, -27, 51.999992, -58.999992, 44, -59, 19.999996, -51, 3.9999962, -51, -4.000004, -59, -20.000004, -59.000015, -43.999996, 1.4038391, -68.99309, 1.486023, 68.99219)
+uv = PackedVector2Array(-32, -40, -8, -40, 15.999985, -31.999996, 32, -16, 39.999985, 8, 39.999985, 32, 32, 56, 15.999985, 72, -8.000015, 80, -32, 80, -56, 72, -72, 56, -80, 32, -80.000015, 8, -72, -16, -56, -32, -3, -51.999992, -3, 52)
+polygons = [PackedInt32Array(15, 0, 16, 1, 2, 3, 4, 5, 6, 7, 8, 17, 9, 10, 11, 12, 13, 14)]
+internal_vertex_count = 2
+
+[node name="Pivot" type="Node2D" parent="." unique_id=971025864]
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="RotatingPivot" type="Polygon2D" parent="Pivot" unique_id=1598985409]
+position = Vector2(0.21263456, -4.768372e-07)
+scale = Vector2(0.84052306, 0.84052306)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-10.206743, -57.70039, 12.873411, -57.70039, 35.953552, -50.007004, 51.340336, -34.62024, 59.03371, -11.540081, 59.03371, 11.540073, 51.340336, 34.620228, 35.953552, 50.007, 12.873396, 57.700386, -10.206743, 57.700386, -33.286896, 50.007, -48.67367, 34.620228, -56.367054, 11.540073, -56.367073, -11.540081, -48.67368, -34.620235, -33.286896, -50.007008)
+uv = PackedVector2Array(-32, -40, -8, -40, 15.999985, -31.999996, 32, -16, 39.999985, 8, 39.999985, 32, 32, 56, 15.999985, 72, -8.000015, 80, -32, 80, -56, 72, -72, 56, -80, 32, -80.000015, 8, -72, -16, -56, -32)
+
+[node name="Canon" type="Polygon2D" parent="Pivot" unique_id=784986024]
+position = Vector2(-4.768372e-07, -4.768372e-07)
+scale = Vector2(1.0000001, 1.0000001)
+color = Color(0.8865703, 0.69839734, 0.4878264, 1)
+polygon = PackedVector2Array(85.25358, -22.755981, -2.7464352, -22.755978, -2.7464352, 25.244015, 85.25358, 25.244022)
+uv = PackedVector2Array(-60.000244, -36.666664, -60.000244, 42, -34.66693, 42, -34.66693, -36.666664)
+
+[node name="BulletSpawnPt" type="Node2D" parent="Pivot" unique_id=689823453]
+position = Vector2(125.38001, -4.768372e-07)
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=3539102]
+wait_time = 0.8
+one_shot = true
+
+[node name="TurretRange" type="Area2D" parent="." unique_id=1164446182]
+collision_layer = 0
+monitorable = false
+
+[node name="RangeCollider" type="CollisionShape2D" parent="TurretRange" unique_id=416698347]
+z_index = -1
+shape = SubResource("CircleShape2D_x3mc5")
+disabled = true
+debug_color = Color(0.73333335, 0.46666667, 0.20784314, 0.18431373)
+
+[node name="TurretBody" type="Area2D" parent="." unique_id=499776258]
+visible = false
+collision_layer = 0
+collision_mask = 192
+
+[node name="BodyCollider" type="CollisionShape2D" parent="TurretBody" unique_id=707547392]
+shape = SubResource("CircleShape2D_el7wl")
+debug_color = Color(0, 0.6172859, 0.58930415, 0.41960785)
+
+[node name="NoPlacementZone" parent="." unique_id=2029443674 instance=ExtResource("2_7ahgn")]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NoPlacementZone" unique_id=1445545837]
+polygon = PackedVector2Array(-87.05883, -84.70589, -34, -115, 35, -117, 96, -85, 128, -38, 128, 28, 103, 76, 47.058826, 110.58824, -37.64706, 110.58824, -82.35294, 87.05883, -117.647064, 32.941177, -115.29412, -42.352943)
+disabled = true
+
+[node name="HandCrank" parent="." unique_id=1719548301 instance=ExtResource("3_w7mpn")]
+position = Vector2(-2.3529408, 2.352941)
+rotation = -2.6441739
+
+[node name="EnergyBar" parent="." unique_id=1347073494 instance=ExtResource("4_ogqkv")]
+offset_left = -160.0
+offset_top = 58.823532
+offset_right = -125.0
+offset_bottom = 65.82353
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="area_entered" from="TurretRange" to="." method="_on_turret_range_area_entered"]
+[connection signal="area_exited" from="TurretRange" to="." method="_on_turret_range_area_exited"]
+[connection signal="cranked" from="HandCrank" to="." method="energy_gain"]
