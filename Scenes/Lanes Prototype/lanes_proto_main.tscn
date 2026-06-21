@@ -85,6 +85,7 @@ scale = Vector2(0.9999999, 0.9999999)
 curve = SubResource("Curve2D_kamoa")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=247059653]
+wait_time = 0.25
 autostart = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

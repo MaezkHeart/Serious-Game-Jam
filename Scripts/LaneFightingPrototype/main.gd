@@ -27,12 +27,7 @@ func _input(event: InputEvent) -> void:
 		var interactible_element = raycast_check_for_interractibles()
 		
 		if not interactible_element == null:
-			var ally_collision_mask = 2
-			interactible_element.spawn_unit(
-					BASIC_PLAYER_UNIT,
-					"PlayerUnitPath",
-					ally_collision_mask
-				)
+			interactible_element.spawn_unit(BASIC_PLAYER_UNIT,"PlayerUnitPath")
 
 
 func raycast_check_for_interractibles():
@@ -53,9 +48,4 @@ func raycast_check_for_interractibles():
 
 func _on_spawn_timer_timeout() -> void:
 	var rand_lane = randi_range(1, 3) # temporary
-	var enemy_collision_mask = 1
-	lane_dict[rand_lane].spawn_unit(
-			BASIC_ENEMY,
-			"EnemyPath",
-			enemy_collision_mask
-		)
+	lane_dict[rand_lane].spawn_unit(BASIC_ENEMY,"EnemyPath")

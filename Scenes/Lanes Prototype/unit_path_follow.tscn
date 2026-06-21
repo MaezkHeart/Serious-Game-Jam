@@ -13,11 +13,11 @@ script = ExtResource("1_ox7ku")
 [node name="Polygon2D" type="Polygon2D" parent="Guide" unique_id=633285047]
 polygon = PackedVector2Array(-0.14303374, -4.67364, -2.388036, 3.8981867, 13.53107, -2.2245467)
 
-[node name="EncounterArea" type="Area2D" parent="." unique_id=588013218]
+[node name="EncounterArea(not used)" type="Area2D" parent="." unique_id=588013218]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterArea" unique_id=911829864]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterArea(not used)" unique_id=911829864]
 shape = SubResource("CircleShape2D_ln6rh")
 
-[connection signal="body_entered" from="EncounterArea" to="." method="_on_encounter_area_body_entered"]
+[connection signal="body_entered" from="EncounterArea(not used)" to="." method="_on_encounter_area_body_entered"]
