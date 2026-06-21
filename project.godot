@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Serious Game Jam"
 run/main_scene="uid://c7monp53ajy5i"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [input]
@@ -35,8 +35,8 @@ scroll_wheel_down={
 
 [layer_names]
 
-2d_physics/layer_1="Enemies"
-2d_physics/layer_2="PlayerUnits"
+2d_physics/layer_1="PlayerUnit"
+2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Lanes"
 
 [physics]

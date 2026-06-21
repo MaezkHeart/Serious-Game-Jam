@@ -1,5 +1,8 @@
 extends Node2D
 
+## Handles inputs and enemy spawn cooldown
+## Should probably be divided between level/unit_manager script and main script later
+
 const BASIC_PLAYER_UNIT = preload("uid://dt3wdlwjtddbi")
 const BASIC_ENEMY = preload("uid://daib08ro8i7su")
 const RAYCAST_COLLISION_MASK = 4
@@ -10,6 +13,7 @@ const RAYCAST_COLLISION_MASK = 4
 
 var lane_dict := {}
 
+
 func _ready() -> void:
 	lane_dict = {
 		1 : lane_1,
@@ -17,15 +21,24 @@ func _ready() -> void:
 		3 : lane_3,
 	}
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		var interactible_element = raycast_check_for_interractibles()
+		
 		if not interactible_element == null:
-			interactible_element.spawn_unit(BASIC_PLAYER_UNIT, "PlayerUnitPath")
+			var ally_collision_mask = 2
+			interactible_element.spawn_unit(
+					BASIC_PLAYER_UNIT,
+					"PlayerUnitPath",
+					ally_collision_mask
+				)
+
 
 func raycast_check_for_interractibles():
 	## This function returns the node that mouse hovers over and its
 	## collision layer in an array
+	
 	var space_state = get_world_2d().direct_space_state
 	var parameters  = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
@@ -40,4 +53,9 @@ func raycast_check_for_interractibles():
 
 func _on_spawn_timer_timeout() -> void:
 	var rand_lane = randi_range(1, 3) # temporary
-	lane_dict[rand_lane].spawn_unit(BASIC_ENEMY, "EnemyPath")
+	var enemy_collision_mask = 1
+	lane_dict[rand_lane].spawn_unit(
+			BASIC_ENEMY,
+			"EnemyPath",
+			enemy_collision_mask
+		)

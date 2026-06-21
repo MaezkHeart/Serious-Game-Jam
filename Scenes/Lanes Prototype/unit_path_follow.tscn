@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dtulup478vp38"]
 
-[ext_resource type="Script" uid="uid://ct0ieme7ybwxk" path="res://Scripts/LaneFightingPrototype/enemy_path_follow.gd" id="1_ox7ku"]
+[ext_resource type="Script" uid="uid://ct0ieme7ybwxk" path="res://Scripts/LaneFightingPrototype/unit_path_follow.gd" id="1_ox7ku"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ln6rh"]
 
 [node name="UnitPathFollow" type="PathFollow2D" unique_id=922385664]
 loop = false
@@ -9,5 +11,13 @@ script = ExtResource("1_ox7ku")
 [node name="Guide" type="Node2D" parent="." unique_id=778142092]
 
 [node name="Polygon2D" type="Polygon2D" parent="Guide" unique_id=633285047]
-visible = false
 polygon = PackedVector2Array(-0.14303374, -4.67364, -2.388036, 3.8981867, 13.53107, -2.2245467)
+
+[node name="EncounterArea" type="Area2D" parent="." unique_id=588013218]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterArea" unique_id=911829864]
+shape = SubResource("CircleShape2D_ln6rh")
+
+[connection signal="body_entered" from="EncounterArea" to="." method="_on_encounter_area_body_entered"]

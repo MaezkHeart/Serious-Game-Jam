@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://daib08ro8i7su"]
 
-[ext_resource type="Script" uid="uid://dpjn1n1uqecbn" path="res://Scripts/LaneFightingPrototype/basic_enemy.gd" id="1_lnkmd"]
+[ext_resource type="Script" uid="uid://bbbwdm5ig2tq3" path="res://Scripts/LaneFightingPrototype/basic_enemy.gd" id="1_lnkmd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my7ai"]
 radius = 17.117243
 
 [node name="BasicEnemy" type="RigidBody2D" unique_id=1349566713]
+collision_layer = 2
 collision_mask = 3
 mass = 0.1
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_lnkmd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=489891610]
