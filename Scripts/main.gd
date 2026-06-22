@@ -1,68 +1,55 @@
 extends Node2D
-## This script checks the mouse movemement of player and inputs
-## Temporarily, it is doing some of the actions on input
 
-# TODO : Fix crash when reloading screen and clicking at the same time
-signal left_click
-signal scrolled_up
-signal scrolled_down
+## Handles inputs and enemy spawn cooldown
+## Should probably be divided between level/unit_manager script and main script later
 
-# Detects Core, Bits and Towers layers
-const RAYCAST_COLLISION_MASK = 28
-const TOWER_LAYER = 4
+# TODO: Make it so units are attracted to an enemy in range during combat
+# TODO: Change sprite
+# TODO: Combine with building minigame
 
-# Takes two values : [Node, collision layer]
-var mouse_over_interractible : Array 
-var resources := 0:
-	set(value):
-		resources = value
-		resource_label.text = "Resources = " + str(value)
-var time_in_level: float = 0.0
+const BASIC_PLAYER_UNIT = preload("uid://dt3wdlwjtddbi")
+const BASIC_ENEMY = preload("uid://daib08ro8i7su")
+const RAYCAST_COLLISION_MASK = 4
 
-@onready var resource_label: Label = %ResourceLabel
-@onready var core: Node2D = %Core
-@onready var level: Node2D = %Level1
-@onready var tower_manager: Node2D = %TowerManager
+@onready var lane_1: Area2D = $Lane1
+@onready var lane_2: Area2D = $Lane2
+@onready var lane_3: Area2D = $Lane3
+
+var lane_dict := {}
 
 
-func _process(_delta: float) -> void:
-	
-	## Checking if mouse is over interractible
-	mouse_over_interractible = raycast_check_for_interractibles()
-	
-	## Handling resource collection
-	if !mouse_over_interractible.has(null):
-		if mouse_over_interractible[0].get_parent() == core:
-			resources += mouse_over_interractible[0].collect_bit()
+func _ready() -> void:
+	lane_dict = {
+		1 : lane_1,
+		2 : lane_2,
+		3 : lane_3,
+	}
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
+		var interactible_element = raycast_check_for_interractibles()
 		
-		if mouse_over_interractible[0] == core:
-			core.core_mined()
-		elif mouse_over_interractible[1] == TOWER_LAYER:
-			tower_manager.upgrade_tower(mouse_over_interractible[0])
-		else:
-			left_click.emit()
-	
-	if event.is_action("scroll_wheel_up"):
-		scrolled_up.emit()
-	
-	if event.is_action("scroll_wheel_down"):
-		scrolled_down.emit()
+		if not interactible_element == null:
+			interactible_element.spawn_unit(BASIC_PLAYER_UNIT,"PlayerUnitPath")
 
 
 func raycast_check_for_interractibles():
 	## This function returns the node that mouse hovers over and its
-	## collision layer
+	## collision layer in an array
+	
 	var space_state = get_world_2d().direct_space_state
 	var parameters  = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
 	parameters.collision_mask = RAYCAST_COLLISION_MASK
 	parameters.collide_with_areas = true
 	var result = space_state.intersect_point(parameters)
+	
 	if result.size() > 0:
-		return [result[0].collider.get_parent(),
-				result[0].collider.collision_layer]
-	return [null, null]
+		return result[0].collider
+	return null
+
+
+func _on_spawn_timer_timeout() -> void:
+	var rand_lane = randi_range(1, 3) # temporary
+	lane_dict[rand_lane].spawn_unit(BASIC_ENEMY,"EnemyPath")

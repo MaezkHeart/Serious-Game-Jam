@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://1jk06orar4pn"]
-
-[node name="EnemyPathFollow" type="PathFollow2D" unique_id=1054563514]
-
-[node name="TargetPosition" type="Node2D" parent="." unique_id=1355359115]

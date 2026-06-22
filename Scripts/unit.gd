@@ -34,6 +34,7 @@ var is_in_combat := false
 
 func _ready() -> void:
 	health = max_health
+	health_changed.emit()
 	
 	path_guide = path_follow.find_child("Guide")
 	target_pos = path_guide.global_position

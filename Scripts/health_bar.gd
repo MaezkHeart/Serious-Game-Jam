@@ -1,12 +1,18 @@
-extends ProgressBar
+extends TextureProgressBar
 
-@onready var core : Node2D = $".."
-@onready var health_label: Label = $HealthLabel
+@export var unit : Node2D
+
+var pivot
+
 
 func _ready():
-	core.health_changed.connect(update_health_bar)
+	unit.health_changed.connect(update_health_bar)
+	
+	pivot = get_parent()
 	update_health_bar()
 
+func _process(_delta: float) -> void:
+	pivot.rotation = -unit.rotation
+
 func update_health_bar():
-	value = core.health * 100 / core.max_health
-	health_label.text = str(core.health) + " / " + str(core.max_health)
+	value = unit.health * 100 / unit.max_health

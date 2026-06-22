@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://daib08ro8i7su"]
 
-[ext_resource type="Script" uid="uid://bbbwdm5ig2tq3" path="res://Scripts/LaneFightingPrototype/basic_enemy.gd" id="1_lnkmd"]
-[ext_resource type="PackedScene" uid="uid://4t183y78j406" path="res://Scenes/enemy_health_bar.tscn" id="2_ju3mq"]
+[ext_resource type="Script" uid="uid://bbbwdm5ig2tq3" path="res://Scripts/basic_enemy.gd" id="1_lnkmd"]
+[ext_resource type="PackedScene" uid="uid://4t183y78j406" path="res://Scenes/health_bar.tscn" id="2_fecjr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my7ai"]
 radius = 17.117243
@@ -28,11 +28,12 @@ wait_time = 0.1
 
 [node name="HealthBarPivot" type="Node2D" parent="." unique_id=705748251]
 
-[node name="HealthBar" parent="HealthBarPivot" unique_id=1347073494 node_paths=PackedStringArray("unit") instance=ExtResource("2_ju3mq")]
-offset_left = -17.0
-offset_top = -31.0
-offset_right = 18.0
-offset_bottom = -24.0
+[node name="HealthBar" parent="HealthBarPivot" unique_id=1347073494 node_paths=PackedStringArray("unit") instance=ExtResource("2_fecjr")]
+visible = false
+offset_left = -18.0
+offset_top = -32.0
+offset_right = 17.0
+offset_bottom = -25.0
 unit = NodePath("../..")
 
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
