@@ -12,9 +12,9 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_kamoa"]
+[sub_resource type="Curve2D" id="Curve2D_a60md"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1.7787435, -120.003494, 0, 0, 0, 0, -1155.7806, -120.13122)
+"points": PackedVector2Array(0, 0, 0, 0, 4, 118, 0, 0, 0, 0, 1152, 114)
 }
 point_count = 2
 
@@ -41,8 +41,8 @@ shape = SubResource("RectangleShape2D_3hlg8")
 curve = SubResource("Curve2D_8ok3p")
 
 [node name="PlayerUnitPath" type="Path2D" parent="Lane1" unique_id=1962107610]
-rotation = -3.1434364
-curve = SubResource("Curve2D_kamoa")
+position = Vector2(0, 3.335)
+curve = SubResource("Curve2D_a60md")
 
 [node name="Lane2" type="Area2D" parent="." unique_id=1016474930]
 collision_layer = 4
@@ -60,9 +60,8 @@ curve = SubResource("Curve2D_8ok3p")
 
 [node name="PlayerUnitPath" type="Path2D" parent="Lane2" unique_id=1272976889]
 position = Vector2(0, 204.85)
-rotation = 3.1397488
 scale = Vector2(0.99999994, 0.99999994)
-curve = SubResource("Curve2D_kamoa")
+curve = SubResource("Curve2D_a60md")
 
 [node name="Lane3" type="Area2D" parent="." unique_id=1662168175]
 collision_layer = 4
@@ -80,9 +79,8 @@ curve = SubResource("Curve2D_8ok3p")
 
 [node name="PlayerUnitPath" type="Path2D" parent="Lane3" unique_id=1366022965]
 position = Vector2(0, 422.725)
-rotation = 3.1397488
 scale = Vector2(0.9999999, 0.9999999)
-curve = SubResource("Curve2D_kamoa")
+curve = SubResource("Curve2D_a60md")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=247059653]
 wait_time = 0.25

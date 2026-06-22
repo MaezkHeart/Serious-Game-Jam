@@ -19,8 +19,6 @@ func spawn_unit(unit_type: PackedScene, path: String):
 	var new_unit = unit_type.instantiate()
 	
 	# Setting up path_follow/unit pair
-	#print(new_unit)
-	#print(new_path_follow)
 	new_unit.path_follow = new_path_follow
 	new_path_follow.unit = new_unit
 	

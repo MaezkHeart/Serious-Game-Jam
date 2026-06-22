@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wnrjs17sxd4w"]
 
-[ext_resource type="Script" uid="uid://c7h7uvmmpjhum" path="res://Scripts/enemy.gd" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://ceaiixioqj4mm" path="res://Scripts/enemy.gd" id="1_7p1mj"]
 [ext_resource type="PackedScene" uid="uid://4t183y78j406" path="res://Scenes/enemy_health_bar.tscn" id="2_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
@@ -142,12 +142,12 @@ uv = PackedVector2Array(-141.33362, -52.666664, -274.66693, -52.666664, -276.000
 
 [node name="HealthBarPivot" type="Node2D" parent="MoveableElement" unique_id=1526195544]
 
-[node name="TextureProgressBar" parent="MoveableElement/HealthBarPivot" unique_id=1347073494 node_paths=PackedStringArray("enemy") instance=ExtResource("2_md0e3")]
+[node name="TextureProgressBar" parent="MoveableElement/HealthBarPivot" unique_id=1347073494 node_paths=PackedStringArray("unit") instance=ExtResource("2_md0e3")]
 offset_left = -17.0
 offset_top = -45.0
 offset_right = 18.0
 offset_bottom = -38.0
-enemy = NodePath("../../..")
+unit = NodePath("../../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=971889204]
 libraries/ = SubResource("AnimationLibrary_4ra3w")

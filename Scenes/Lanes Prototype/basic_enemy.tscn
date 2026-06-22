@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daib08ro8i7su"]
 
 [ext_resource type="Script" uid="uid://bbbwdm5ig2tq3" path="res://Scripts/LaneFightingPrototype/basic_enemy.gd" id="1_lnkmd"]
+[ext_resource type="PackedScene" uid="uid://4t183y78j406" path="res://Scenes/enemy_health_bar.tscn" id="2_ju3mq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my7ai"]
 radius = 17.117243
@@ -23,7 +24,16 @@ color = Color(1, 1, 1, 0.531)
 polygon = PackedVector2Array(-13.262101, -9.818968, 9.536743e-07, -16.45002, 13.262109, -9.818968, 15.472455, 1.2327856, 11.051755, 12.284538, 9.536743e-07, 16.981533, -11.051751, 12.284538, -15.472451, 1.2327856)
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=758884567]
-wait_time = 0.8
+wait_time = 0.1
+
+[node name="HealthBarPivot" type="Node2D" parent="." unique_id=705748251]
+
+[node name="HealthBar" parent="HealthBarPivot" unique_id=1347073494 node_paths=PackedStringArray("unit") instance=ExtResource("2_ju3mq")]
+offset_left = -17.0
+offset_top = -31.0
+offset_right = 18.0
+offset_bottom = -24.0
+unit = NodePath("../..")
 
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
