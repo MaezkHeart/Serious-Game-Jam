@@ -1,17 +1,18 @@
 extends Node2D
 
-signal robot_completed(robot_node: Node2D)
+signal robot_completed(unit_data: Dictionary)
 
 @export var snap_distance := 28.0
 
 @export var body_head_socket_offset := Vector2(0, -48)
 @export var head_neck_socket_offset := Vector2(0, 48)
 
-@export var correct_head_name := "CorrectHead"
+@export var auto_reset_after_success := true
+@export var success_reset_delay := 0.6
 
 @onready var body_part: Sprite2D = $BodyPart
 @onready var head_choices: Node2D = $HeadChoices
-@onready var wire_minigame: WireMinigame = $WireMinigame
+@onready var minigame_host: MinigameHost = $MinigameHost
 @onready var label: Label = $Label
 
 var head_parts: Array[Sprite2D] = []
@@ -22,31 +23,56 @@ var drag_offset := Vector2.ZERO
 
 var pending_head: Sprite2D = null
 var builder_locked := false
-var robot_is_finished := false
+
+var head_unit_database := {
+	"Head1": {
+		"display_name": "Unit 1",
+		"unit_type": "unit_1",
+		"damage": 35,
+		"move_speed": 70,
+		"lane_cost": 1,
+		"behavior": "explode_on_contact"
+	},
+	"Head2": {
+		"display_name": "Unit 2",
+		"unit_type": "unit_2",
+		"damage": 20,
+		"move_speed": 55,
+		"lane_cost": 2,
+		"behavior": "ranged_projectile"
+	},
+	"Head3": {
+		"display_name": "Unit 3",
+		"unit_type": "unit_3",
+		"damage": 12,
+		"move_speed": 95,
+		"lane_cost": 1,
+		"behavior": "fast_melee"
+	}
+}
 
 
 func _ready() -> void:
-	label.text = "Choose the correct head and connect it to the body."
+	label.text = "Choose a head, attach it to the body, then complete the minigame."
 
 	body_part.centered = true
 
 	for child in head_choices.get_children():
 		if child is Sprite2D:
 			var head := child as Sprite2D
+
 			head.centered = true
 			head_parts.append(head)
 			starting_positions[head] = head.global_position
 
-			var is_correct := head.name == correct_head_name
-			head.set_meta("is_correct", is_correct)
+			var unit_data := _get_unit_data_for_head(head)
+			head.set_meta("unit_data", unit_data)
 
-	wire_minigame.wiring_completed.connect(_on_wiring_completed)
+	minigame_host.minigame_finished.connect(_on_minigame_finished)
 
 
+# Handles dragging heads around the builder area.
 func _unhandled_input(event: InputEvent) -> void:
-	if robot_is_finished:
-		return
-
 	if builder_locked:
 		return
 
@@ -62,6 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			dragging_head.global_position = get_global_mouse_position() + drag_offset
 
 
+# Starts dragging whichever head the player clicked.
 func _start_drag() -> void:
 	var mouse_pos := get_global_mouse_position()
 
@@ -71,18 +98,21 @@ func _start_drag() -> void:
 		drag_offset = dragging_head.global_position - mouse_pos
 		dragging_head.z_index = 10
 
+		var unit_data: Dictionary = dragging_head.get_meta("unit_data", {})
+		label.text = "Selected: " + str(unit_data.get("display_name", "Unknown Unit"))
 
+
+# Stops dragging and checks whether the head was attached to the body.
 func _stop_drag() -> void:
 	if dragging_head == null:
 		return
 
 	dragging_head.z_index = 2
-
 	_try_connect_head(dragging_head)
-
 	dragging_head = null
 
 
+# Finds which head the mouse is currently over.
 func _get_head_under_mouse(mouse_pos: Vector2) -> Sprite2D:
 	for head in head_parts:
 		if head.visible and _mouse_is_over_sprite(head, mouse_pos):
@@ -91,6 +121,7 @@ func _get_head_under_mouse(mouse_pos: Vector2) -> Sprite2D:
 	return null
 
 
+# Checks whether the mouse is inside a sprite's rectangle.
 func _mouse_is_over_sprite(sprite: Sprite2D, mouse_pos: Vector2) -> bool:
 	if sprite.texture == null:
 		return false
@@ -106,6 +137,7 @@ func _mouse_is_over_sprite(sprite: Sprite2D, mouse_pos: Vector2) -> bool:
 	return sprite_rect.has_point(local_mouse_pos)
 
 
+# Checks whether the selected head is close enough to snap onto the body.
 func _try_connect_head(head: Sprite2D) -> void:
 	var body_socket_global := body_part.to_global(body_head_socket_offset)
 	var head_socket_global := head.to_global(head_neck_socket_offset)
@@ -118,14 +150,18 @@ func _try_connect_head(head: Sprite2D) -> void:
 		pending_head = head
 		builder_locked = true
 
-		label.text = "Part connected. Now wire it together."
+		var unit_data: Dictionary = pending_head.get_meta("unit_data", {})
+		label.text = "Building: " + str(unit_data.get("display_name", "Unknown Unit"))
 
-		print("Calling wire minigame")
-		wire_minigame.start_minigame()
+		minigame_host.start_random_minigame({
+			"part_name": pending_head.name,
+			"unit_data": unit_data
+		})
 	else:
-		label.text = "That part is not lined up with the body yet."
+		label.text = "That head is not lined up with the body yet."
 
 
+# Snaps the head into the correct position on top of the body.
 func _snap_head_to_body(head: Sprite2D) -> void:
 	var body_socket_global := body_part.to_global(body_head_socket_offset)
 	var head_socket_global := head.to_global(head_neck_socket_offset)
@@ -134,55 +170,76 @@ func _snap_head_to_body(head: Sprite2D) -> void:
 	head.global_position += movement_needed
 
 
-func _on_wiring_completed(success: bool) -> void:
+# Handles success or failure from whichever minigame the host chose.
+func _on_minigame_finished(success: bool) -> void:
 	if pending_head == null:
 		builder_locked = false
 		return
 
 	if not success:
-		label.text = "Wiring failed. Try connecting the part again."
+		label.text = "Minigame failed. Try again."
 		_return_head_to_start(pending_head)
 		pending_head = null
 		builder_locked = false
 		return
 
-	var part_is_correct: bool = pending_head.get_meta("is_correct")
+	_complete_robot_from_head(pending_head)
 
-	if part_is_correct:
-		_finish_robot()
+
+# Creates the completed unit data based on which head was attached.
+func _complete_robot_from_head(head: Sprite2D) -> void:
+	var unit_data: Dictionary = head.get_meta("unit_data", {}).duplicate(true)
+
+	unit_data["head_node_name"] = head.name
+
+	label.text = "Completed: " + str(unit_data.get("display_name", "Unknown Unit"))
+
+	print("Robot completed:")
+	print(unit_data)
+
+	robot_completed.emit(unit_data)
+
+	if auto_reset_after_success:
+		await get_tree().create_timer(success_reset_delay).timeout
+		reset_builder()
 	else:
-		label.text = "The wiring worked, but this is the wrong part."
-		_return_head_to_start(pending_head)
-		pending_head = null
 		builder_locked = false
 
 
+# Resets the builder so the player can build another robot.
+func reset_builder() -> void:
+	for head in head_parts:
+		head.visible = true
+		head.z_index = 2
+		_return_head_to_start(head)
+
+	pending_head = null
+	dragging_head = null
+	builder_locked = false
+
+	label.text = "Choose a head, attach it to the body, then complete the minigame."
+
+
+# Sends a head back to its original choice position.
 func _return_head_to_start(head: Sprite2D) -> void:
 	if starting_positions.has(head):
 		head.global_position = starting_positions[head]
 
 
-func _finish_robot() -> void:
-	robot_is_finished = true
-	builder_locked = true
+# Looks up what unit a specific numbered head should create.
+func _get_unit_data_for_head(head: Sprite2D) -> Dictionary:
+	var head_name := str(head.name)
 
-	label.text = "Robot complete!"
+	if head_unit_database.has(head_name):
+		return head_unit_database[head_name].duplicate(true)
 
-	var finished_robot := Node2D.new()
-	finished_robot.name = "FinishedRobot"
+	push_warning("No unit data found for head named: " + head_name)
 
-	add_child(finished_robot)
-
-	body_part.reparent(finished_robot, true)
-	pending_head.reparent(finished_robot, true)
-
-	for head in head_parts:
-		if head != pending_head:
-			head.visible = false
-
-	finished_robot.set_meta("unit_type", "wind_up_robot")
-	finished_robot.set_meta("damage", 10)
-	finished_robot.set_meta("move_speed", 80)
-	finished_robot.set_meta("lane_cost", 1)
-
-	emit_signal("robot_completed", finished_robot)
+	return {
+		"display_name": "Unknown Unit",
+		"unit_type": "unknown_unit",
+		"damage": 1,
+		"move_speed": 50,
+		"lane_cost": 1,
+		"behavior": "basic"
+	}
